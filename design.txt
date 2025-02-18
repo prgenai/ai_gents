@@ -1,1 +1,35 @@
-
+flowchart TB
+    User[Developer/Support Team] --> Interface[Natural Language Interface]
+    Interface --> Agent[AI Agent]
+    
+    subgraph DataLake[Data Lake]
+        Splunk[(Splunk Data)]
+        Oracle[(Oracle DB Data)]
+        MongoDB[(MongoDB Data)]
+        AppLogs[(Application Logs)]
+    end
+    
+    subgraph AgentSystem[AI Agent System]
+        Agent --> QueryProcessor[Query Processor]
+        QueryProcessor --> DataAnalyzer[Data Analyzer]
+        QueryProcessor --> MetricsCollector[Metrics Collector]
+        
+        subgraph Tools[Agent Tools]
+            MetricsCollector --> PerformanceTool[Performance Metrics Tool]
+            MetricsCollector --> ErrorTool[Error Analysis Tool]
+            MetricsCollector --> ResourceTool[Resource Monitor Tool]
+            MetricsCollector --> BusinessTool[Business Metrics Tool]
+        end
+    end
+    
+    DataLake --> DataAnalyzer
+    Tools --> ResponseFormatter[Response Formatter]
+    ResponseFormatter --> Interface
+    
+    classDef primary fill:#f9f,stroke:#333,stroke-width:2px
+    classDef secondary fill:#bbf,stroke:#333,stroke-width:2px
+    classDef storage fill:#dfd,stroke:#333,stroke-width:2px
+    
+    class User,Interface primary
+    class Agent,QueryProcessor,DataAnalyzer,MetricsCollector,ResponseFormatter secondary
+    class Splunk,Oracle,MongoDB,AppLogs storage
