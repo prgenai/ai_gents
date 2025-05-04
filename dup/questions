@@ -1,0 +1,90 @@
+**Listing possible user queries**
+
+It seems like the user wants examples of questions they could ask the AI Idea Similarity Agent. These typically involve finding similarities or overlaps between ideas. Some simple queries might be, "Is this idea similar to any existing ones?" or "Find duplicates for this idea description." For more complex ones, users could ask, for instance, "Show top 5 similar use cases to \[description]" or "Explain why these two ideas are similar." Options can span from general queries to more specific ones, like asking about predictive maintenance or chatbot projects.
+
+
+Thought for 10 seconds
+
+
+Below are typical things a user might ask the **AI Idea Similarity Agent**, grouped by intent and illustrated with concrete examples. Use them as template prompts or to anticipate dialogue flows the agent should handle.
+
+---
+
+### 1  Submit & Scan a New Idea
+
+* **“Here’s an idea for an AI-driven document-review bot. Are there any duplicates in the knowledge base?”**
+* **“Compare this draft use-case (text below) against everything we’ve logged so far and list the top five matches.”**
+
+### 2  Direct Pairwise Comparison
+
+* **“How similar is UC-017 to UC-089?”**
+* **“Do ‘Fraud Detector Lite’ and ‘Real-time Transaction Guardian’ overlap? Explain.”**
+
+### 3  Batch or Bulk Checks
+
+* **“I’m pasting three new ideas—flag any that collide with existing ones.”**
+* **“For this CSV of 50 ideas, return duplicates or near-duplicates with similarity ≥ 80 %.”**
+
+### 4  Novelty & Gap Analysis
+
+* **“Is this predictive-maintenance concept unique, or do we already have something close?”**
+* **“Show me areas where our chatbot ideas cluster too tightly and where we have white-space.”**
+
+### 5  Domain-Focused Queries
+
+* **“List existing AI ideas in the ‘Customer Support’ domain most like this new voice-assistant pitch.”**
+* **“In the Risk & Compliance department, what projects cover anomaly detection, and do any overlap?”**
+
+### 6  Explanation & Rationale Requests
+
+* **“Why did you rate UC-012 and UC-045 as 83 % similar? Provide details.”**
+* **“Outline the shared concepts between ‘Smart Routing Agent’ and ‘Dynamic Load Balancer.’”**
+
+### 7  Consolidation & Collaboration Guidance
+
+* **“Which projects could be merged with UC-301 to avoid duplicate effort?”**
+* **“Suggest collaboration opportunities for these four ideas solving similar KYC problems.”**
+
+### 8  Threshold or Score-Tuned Searches
+
+* **“Return only ideas ≥ 70 % similar to this proposal.”**
+* **“Give me the single closest match—even if it’s below the usual threshold—and explain your low confidence.”**
+
+### 9  Edge-Case or Clarification Dialogues
+
+* **“The idea is only half-baked: ‘AI for factory optimization.’ What extra info do you need to assess similarity?”**
+* **“If an idea spans computer-vision and NLP, how do you treat multi-concept overlap?”**
+
+### 10  Meta & Agent-Performance Questions
+
+* **“Which factors weighed most in scoring UC-199 vs UC-200?”**
+* **“Show false-positive matches you flagged last month and how you adjusted thresholds.”**
+
+---
+
+These examples cover the full spectrum—from basic “find duplicates” to nuanced explanations, threshold tweaks, and agent-self-monitoring queries—so you can tailor the agent’s dialogue and UI accordingly.
+
+================
+**Considering reviewer questions**
+
+The user is asking about potential questions a reviewer might ask during an analysis by the AI Idea Similarity Agent. I think they want categories with examples, like questions on content verification, methodology, impact, or scoring. I'll break it down into groups such as "before analysis" (input quality), "during evaluation" (duplication checks, methodology), and "post-results" (false positives, recommendations). I can focus on examples that keep responses structured yet concise, without needing browsing or current events. Also, the sustainability of results seems important to review.
+
+
+Thought for 7 seconds
+
+
+### Common Questions Human **Reviewers** Might Raise About a Similarity-Analysis Report
+
+| Category                             | Typical Reviewer Questions                                                                                                                                                                                                                 | Why They Matter                                                                 |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
+| **Idea Clarity & Completeness**      | • *“Is the new idea description detailed enough to allow a fair comparison?”*  <br>• *“What additional context (business goal, data sources) is missing?”*                                                                                 | Ensures garbage-in/garbage-out doesn’t undermine the analysis.                  |
+| **Method & Scoring**                 | • *“Which factors (problem, tech stack, domain, data) dominated the 88 % score?”*  <br>• *“How were weights calibrated, and can we see the raw component scores?”*  <br>• *“Why does keyword overlap count less than functional overlap?”* | Validates that the agent’s scoring logic aligns with organizational priorities. |
+| **Result Validity**                  | • *“What makes UC-014 and UC-127 truly ‘duplicate’ rather than merely related?”*  <br>• *“Show the top three phrases or concepts that drove the match.”*  <br>• *“Are there important distinctions the model might be missing?”*           | Guards against false positives and mis-labeling of near-neighbors.              |
+| **Confidence & Thresholds**          | • *“How confident is the agent about the 71 % match, and what’s the margin of error?”*  <br>• *“Should we raise the similarity threshold for compliance use-cases?”*                                                                       | Helps reviewers weigh automated scores against domain judgment.                 |
+| **Business Impact & Action**         | • *“If we merge these ideas, what savings (time, budget) do we anticipate?”*  <br>• *“Which team should own the consolidated initiative?”*  <br>• *“Do we risk losing unique value by combining them?”*                                    | Turns detection insights into concrete portfolio decisions.                     |
+| **Duplication Risk & Coverage Gaps** | • *“Where else in the pipeline do we have chatbots—are we oversaturated?”*  <br>• *“Are there strategic domains with zero representation that we should target next?”*                                                                     | Balances innovation spread against redundancy.                                  |
+| **Edge Cases & Exceptions**          | • *“This idea blends CV and NLP—did the model evaluate each piece separately?”*  <br>• *“How does the agent treat multi-tenant versus single-tenant variations?”*                                                                          | Ensures complex or hybrid ideas are assessed fairly.                            |
+| **Compliance & Data Concerns**       | • *“Both ideas use customer PII—does similarity affect our data-governance review path?”*                                                                                                                                                  | Keeps regulatory obligations front-of-mind.                                     |
+| **Continuous Improvement**           | • *“Which prior matches were overturned by humans, and how did we retrain?”*  <br>• *“What feedback loop exists to refine weights or add domain vocabulary?”*                                                                              | Builds trust by showing the system learns from reviewer input.                  |
+
+> **Tip for Facilitators:** Encourage reviewers to ask “why” and “so what” after every similarity claim—this surfaces hidden assumptions and drives more informed consolidation or go/no-go decisions.
