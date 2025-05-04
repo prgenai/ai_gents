@@ -59,3 +59,66 @@ As an AI architect, here are the primary types of questions and requests users w
 35. "How might I expand on the most unique aspects of my proposal?"
 
 By supporting these query types, your idea evaluation agent will deliver comprehensive value to users throughout the innovation lifecycle—from initial concept validation through refinement and potential implementation planning.
+
+=========
+# Questions a Human Idea Reviewer Would Ask the AI Evaluation Agent
+
+As an AI architect, here are the types of questions a human idea reviewer (someone who evaluates or manages the innovation process) would likely ask your AI Idea Evaluation Agent:
+
+## Assessment Validation Questions
+
+1. "Why did you classify idea #123 as a duplicate of #456? Their implementations seem different."
+2. "What specific features made you determine this idea is unique despite similar concepts?"
+3. "Can you explain the similarity score calculation between these two ideas?"
+4. "What were the key semantic elements that triggered this high similarity score?"
+5. "How confident are you in this uniqueness assessment given the limited description?"
+
+## Process Efficiency Questions
+
+6. "Summarize the top 5 duplicate patterns you've identified across our idea submissions."
+7. "Which departments are submitting the most redundant ideas?"
+8. "What percentage of our idea submissions are truly unique versus variations of existing concepts?"
+9. "How has the uniqueness ratio changed over the past quarter?"
+10. "Which idea categories have the highest duplication rates?"
+
+## Decision Support Questions
+
+11. "Should we approve this idea for further development despite its similarity to existing concepts?"
+12. "Between these similar ideas (#234 and #567), which one has more innovative potential?"
+13. "What modifications would make this borderline idea worth pursuing?"
+14. "Does this idea justify creating a new project or should it be merged with an existing initiative?"
+15. "How would you prioritize these three similar ideas based on their unique aspects?"
+
+## Pattern Recognition Questions
+
+16. "What emerging AI patterns are we not yet exploring in our innovation pipeline?"
+17. "Are there any idea clusters forming that we should consolidate into formal programs?"
+18. "Which AI pattern has shown the most evolution in our recent submissions?"
+19. "Can you identify any blind spots in our current innovation portfolio?"
+20. "Are our employees focusing too narrowly on certain AI applications?"
+
+## Collaboration Facilitation Questions
+
+21. "Which teams should collaborate based on their complementary idea submissions?"
+22. "Who else in the organization is working on similar concepts to this new submission?"
+23. "Can you identify potential mentors for this idea based on similar past submissions?"
+24. "Which existing projects could benefit from incorporating elements of this new idea?"
+25. "What cross-departmental opportunities exist based on our idea submission patterns?"
+
+## System Performance Questions
+
+26. "How accurate have your similarity assessments been based on subsequent human review?"
+27. "What types of ideas are most challenging for you to classify correctly?"
+28. "What additional data would improve your evaluation accuracy?"
+29. "How has your pattern recognition improved as the knowledge base has grown?"
+30. "Where are the false positives most commonly occurring in your similarity detection?"
+
+## Strategic Insight Questions
+
+31. "Based on our idea submissions, which AI capabilities should we prioritize developing?"
+32. "What untapped AI opportunities exist based on gaps in our current idea portfolio?"
+33. "How aligned are our employee-submitted ideas with our strategic AI priorities?"
+34. "Which business areas have the most innovative AI ideas relative to submission volume?"
+35. "What AI trends in our idea database differ from broader industry trends?"
+
+These questions reflect the needs of human reviewers who are using the AI agent as a tool to make better decisions, identify patterns, foster collaboration, and derive strategic insights from the organization's collective innovation efforts.
