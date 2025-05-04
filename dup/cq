@@ -1,0 +1,61 @@
+# User Query Types for AI Idea Evaluation Agent
+
+As an AI architect, here are the primary types of questions and requests users would likely ask your AI Idea Evaluation Agent, organized by functional categories:
+
+## Idea Submission & Initial Evaluation
+
+1. "Is my idea for [description] unique?"
+2. "Check if this AI solution is already in our knowledge base: [description]"
+3. "Evaluate the uniqueness of this concept: [description]"
+4. "Has someone already proposed an AI solution for [specific problem]?"
+5. "Does my idea overlap with existing initiatives?"
+
+## Similarity Analysis
+
+6. "Show me ideas similar to mine about [brief description]"
+7. "Find the top 3 ideas most similar to ID-123"
+8. "What's the similarity score between my idea and [specific existing idea]?"
+9. "How does my recommendation engine idea compare to existing recommendation systems?"
+10. "Are there any ideas in the knowledge base that address [specific business problem]?"
+
+## Pattern Classification
+
+11. "What type of AI pattern is my idea classified as?"
+12. "Is this considered an agentic AI or generative AI solution?"
+13. "How many predictive analytics ideas do we have in the knowledge base?"
+14. "Show me all hybrid AI ideas that combine generative and analytical capabilities"
+15. "What's the distribution of AI patterns across our idea database?"
+
+## Refinement & Differentiation
+
+16. "How could I modify my idea to make it more unique?"
+17. "What aspects of my idea are novel compared to similar ones?"
+18. "What additional features would differentiate my idea from ID-456?"
+19. "Which parts of my proposal overlap with existing solutions?"
+20. "How can I combine elements from existing ideas to create something new?"
+
+## Knowledge Base Exploration
+
+21. "What are the most recent AI ideas submitted in [department/area]?"
+22. "Show me all ideas related to customer service automation"
+23. "Which ideas use large language models for [specific application]?"
+24. "Are there any AI solutions proposed for [specific business challenge]?"
+25. "What's the most common type of AI idea in our knowledge base?"
+
+## Trend Analysis
+
+26. "What AI patterns are trending in our idea submissions this quarter?"
+27. "Is my idea following current innovation trends or breaking new ground?"
+28. "Which business areas have the most AI idea submissions?"
+29. "Are there any underexplored applications for AI in our organization?"
+30. "How has the focus of AI ideas evolved over the past year?"
+
+## Implementation Guidance
+
+31. "What information should I add to strengthen my idea submission?"
+32. "Based on similar ideas, what challenges might I face implementing this?"
+33. "Are there existing projects I should connect with based on my idea?"
+34. "What additional context would help evaluate my idea more accurately?"
+35. "How might I expand on the most unique aspects of my proposal?"
+
+By supporting these query types, your idea evaluation agent will deliver comprehensive value to users throughout the innovation lifecycle—from initial concept validation through refinement and potential implementation planning.
