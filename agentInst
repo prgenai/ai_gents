@@ -1,0 +1,10 @@
+Domain-Based Distinction Rule
+🔹 If two ideas use similar techniques (e.g., summarization), but target different domains or business use cases, treat them as distinct ideas.
+
+Examples:
+
+✅ "Call Center Summarization" vs. "KYC Document Summarization" → Distinct
+
+❌ "Customer Chatbot for Travel Insurance" vs. "Customer Chatbot for Health Insurance" → Potentially Similar, check intent
+
+You must always consider domain, data source, and business intent when determining similarity
