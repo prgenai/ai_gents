@@ -1,0 +1,116 @@
+import json
+import os
+import re
+
+def convert_jsonl_to_txt(jsonl_file_path: str, output_directory: str,
+                         id_field_name_json: str,
+                         filename_title_field_name_json: str,
+                         field_mappings_for_txt_output: dict):
+    """
+    Converts a JSON Lines (JSONL) file into multiple individual .txt files.
+    Each line in the JSONL file is expected to be a JSON object.
+
+    Args:
+        jsonl_file_path (str): The full path to the input JSONL file.
+        output_directory (str): The directory where the output .txt files will be saved.
+        id_field_name_json (str): The JSON key for the unique ID (used for filename).
+        filename_title_field_name_json (str): The JSON key for the title (used for filename).
+        field_mappings_for_txt_output (dict): A dictionary mapping JSON field names
+                                               to their desired display labels in the TXT file.
+                                               The order of keys in this dict determines
+                                               the order in the output TXT file.
+    """
+
+    # Create the output directory if it doesn't already exist
+    try:
+        os.makedirs(output_directory, exist_ok=True)
+        print(f"Output directory ensured: {output_directory}")
+    except OSError as e:
+        print(f"Error creating output directory '{output_directory}': {e}")
+        return
+
+    idea_count = 0
+
+    try:
+        with open(jsonl_file_path, 'r', encoding='utf-8') as reader:
+            for line_num, line in enumerate(reader, 1):
+                line = line.strip()
+                if not line:
+                    continue  # Skip empty lines
+
+                try:
+                    json_data = json.loads(line)
+
+                    # Extract ID and title for filename using configurable JSON field names
+                    # Provide fallback values if fields are missing
+                    idea_id = json_data.get(id_field_name_json, f"unknown_id_{idea_count + 1:03d}")
+                    title_for_filename = json_data.get(filename_title_field_name_json, "Untitled Idea")
+
+                    # Sanitize the title to create a safe filename
+                    # Replaces any character not alphanumeric, dot, or dash with an underscore
+                    sanitized_title = re.sub(r'[^a-zA-Z0-9.-]', '_', title_for_filename).strip()
+                    if not sanitized_title:
+                        sanitized_title = "untitled"  # Fallback if title becomes empty after sanitization
+
+                    # Construct the filename using the extracted ID and sanitized title
+                    # Example: ai_idea_001_AI_Powered_Hyper_Personalized_Learning.txt
+                    filename = f"{idea_id}_{sanitized_title}.txt"
+                    output_path = os.path.join(output_directory, filename)
+
+                    # Write the extracted content to the new .txt file using the defined mappings
+                    with open(output_path, 'w', encoding='utf-8') as writer:
+                        for json_field_name, display_label in field_mappings_for_txt_output.items():
+                            field_value = json_data.get(json_field_name, "Not Provided")
+                            writer.write(f"{display_label}: {field_value}\n")
+
+                    idea_count += 1
+                    print(f"Successfully created: {output_path}")
+
+                except json.JSONDecodeError as e:
+                    print(f"Error parsing JSON on line {line_num}: {line} - {e}")
+                except Exception as e:
+                    print(f"An unexpected error occurred processing line {line_num}: {e}")
+
+    except FileNotFoundError:
+        print(f"Error: Input JSONL file not found at '{jsonl_file_path}'")
+    except Exception as e:
+        print(f"Error reading JSONL file '{jsonl_file_path}': {e}")
+
+    print(f"\nConversion complete. Total ideas processed: {idea_count}")
+    if idea_count == 0:
+        print("No ideas were processed. Please check your JSONL file path and content.")
+
+# --- CONFIGURABLE JSON FIELD NAMES & OUTPUT MAPPING ---
+# Change these strings if the keys in your JSONL file are different.
+# These are used for creating the filename and extracting content.
+ID_FIELD_NAME_JSON = "id"
+FILENAME_TITLE_FIELD_NAME_JSON = "title"
+
+# Mapping of JSON Field Names to their Display Labels in the TXT File
+# Define which JSON fields you want to include in the output .txt file
+# and what label they should have (e.g., "json_key" -> "Display Label").
+# The order defined here will be the order in the output .txt file.
+FIELD_MAPPINGS_FOR_TXT_OUTPUT = {
+    "title": "Title",              # JSON field "title" will appear as "Title: [value]"
+    "description": "Description",  # JSON field "description" will appear as "Description: [value]"
+    "category": "Category",        # Example: If your JSON has "category", map it to "Category: [value]"
+    # Add more mappings here as needed:
+    # "your_json_key_in_jsonl": "Your Display Label",
+}
+# --- END CONFIGURABLE JSON FIELD NAMES & OUTPUT MAPPING ---
+
+# --- CONFIGURABLE FILE PATHS (Adjusted for Windows) ---
+# 1. Path to your input JSONL file
+# Example: r"C:\Users\YourUser\Documents\ai_ideas.jsonl"
+# Using r"" for raw string to handle backslashes easily.
+JSONL_FILE_PATH = r"C:\Temp\ai_ideas.jsonl" # *** CHANGE THIS TO YOUR ACTUAL JSONL FILE PATH ***
+
+# 2. Directory where the output .txt files will be saved
+# Example: r"C:\Users\YourUser\Desktop\output_ai_ideas_txt"
+OUTPUT_DIRECTORY = r"C:\Temp\output_ai_ideas_txt" # *** CHANGE THIS TO YOUR DESIRED OUTPUT DIRECTORY ***
+# --- END CONFIGURABLE FILE PATHS ---
+
+if __name__ == "__main__":
+    convert_jsonl_to_txt(JSONL_FILE_PATH, OUTPUT_DIRECTORY,
+                         ID_FIELD_NAME_JSON, FILENAME_TITLE_FIELD_NAME_JSON,
+                         FIELD_MAPPINGS_FOR_TXT_OUTPUT)
