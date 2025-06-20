@@ -1,0 +1,139 @@
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * A Java program to convert a JSON Lines (JSONL) file into multiple
+ * individual .txt files. Each line in the JSONL file is expected to be
+ * a JSON object.
+ *
+ * This version allows configurable JSON field names for ID and filename title,
+ * and a mapping for input JSON field names to their display labels in the output TXT file.
+ *
+ * Each generated .txt file will contain specified fields from one idea,
+ * formatted with their mapped labels.
+ */
+public class JsonlToTxtConverter {
+
+    // --- CONFIGURABLE JSON FIELD NAMES & OUTPUT MAPPING ---
+
+    // 1. JSON Field Name for Unique ID (used for filename)
+    // Change this if the JSON key for the ID in your JSONL file is different.
+    private static final String ID_FIELD_NAME_JSON = "id";
+
+    // 2. JSON Field Name for Title (used for filename and as a content field)
+    // Change this if the JSON key for the title in your JSONL file is different.
+    private static final String FILENAME_TITLE_FIELD_NAME_JSON = "title";
+
+    // 3. Mapping of JSON Field Names to their Display Labels in the TXT File
+    // Define which JSON fields you want to include in the output .txt file
+    // and what label they should have (e.g., "json_key" -> "Display Label:").
+    // The order defined here will be the order in the output .txt file.
+    private static final Map<String, String> FIELD_MAPPINGS_FOR_TXT_OUTPUT = new LinkedHashMap<>();
+    static {
+        FIELD_MAPPINGS_FOR_TXT_OUTPUT.put("title", "Title");          // JSON field "title" will appear as "Title: [value]"
+        FIELD_MAPPINGS_FOR_TXT_OUTPUT.put("description", "Description"); // JSON field "description" will appear as "Description: [value]"
+        FIELD_MAPPINGS_FOR_TXT_OUTPUT.put("category", "Category");    // Example: If your JSON has "category", map it to "Category: [value]"
+        // Add more mappings here as needed:
+        // FIELD_MAPPINGS_FOR_TXT_OUTPUT.put("your_json_key", "Your Display Label");
+    }
+    // --- END CONFIGURABLE JSON FIELD NAMES & OUTPUT MAPPING ---
+
+
+    public static void main(String[] args) {
+        // --- CONFIGURABLE FILE PATHS (Adjusted for Windows) ---
+        // 1. Path to your input JSONL file
+        // Example: "C:\\Users\\YourUser\\Documents\\ai_ideas.jsonl"
+        String jsonlFilePath = "C:\\Temp\\ai_ideas.jsonl"; // *** CHANGE THIS TO YOUR ACTUAL JSONL FILE PATH ***
+
+        // 2. Directory where the output .txt files will be saved
+        // Example: "C:\\Users\\YourUser\\Desktop\\output_ai_ideas_txt"
+        String outputDirectory = "C:\\Temp\\output_ai_ideas_txt"; // *** CHANGE THIS TO YOUR DESIRED OUTPUT DIRECTORY ***
+        // --- END CONFIGURABLE FILE PATHS ---
+
+
+        // Create the output directory if it doesn't already exist
+        try {
+            Files.createDirectories(Paths.get(outputDirectory));
+            System.out.println("Output directory ensured: " + outputDirectory);
+        } catch (IOException e) {
+            System.err.println("Error creating output directory: " + e.getMessage());
+            return; // Exit if directory cannot be created
+        }
+
+        ObjectMapper objectMapper = new ObjectMapper(); // Jackson's object mapper for JSON parsing
+        int ideaCount = 0; // Counter for naming output files (used for default ID/title if missing)
+
+        // Use BufferedReader for efficient line-by-line reading of the JSONL file
+        try (BufferedReader reader = new BufferedReader(new FileReader(jsonlFilePath))) {
+            String line;
+            // Read the JSONL file line by line
+            while ((line = reader.readLine()) != null) {
+                // Skip empty or whitespace-only lines
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
+
+                try {
+                    // Parse each line as a JSON object
+                    JsonNode jsonNode = objectMapper.readTree(line);
+
+                    // Extract ID and title for filename using configurable JSON field names
+                    String id = jsonNode.has(ID_FIELD_NAME_JSON) ? jsonNode.get(ID_FIELD_NAME_JSON).asText() : String.format("unknown_id_%03d", ideaCount + 1);
+                    String titleForFilename = jsonNode.has(FILENAME_TITLE_FIELD_NAME_JSON) ? jsonNode.get(FILENAME_TITLE_FIELD_NAME_JSON).asText() : "Untitled Idea";
+
+
+                    // Sanitize the title to create a safe filename
+                    // Replace any character that is not alphanumeric, a dash, or a dot with an underscore
+                    String sanitizedTitle = titleForFilename.replaceAll("[^a-zA-Z0-9.-]", "_").trim();
+                    if (sanitizedTitle.isEmpty()) {
+                        sanitizedTitle = "untitled"; // Fallback if title becomes empty after sanitization
+                    }
+
+                    // Construct the filename using the extracted ID and a sanitized title
+                    String filename = String.format("%s_%s.txt", id, sanitizedTitle);
+                    Path outputPath = Paths.get(outputDirectory, filename);
+
+                    // Write the extracted content to the new .txt file using the defined mappings
+                    try (FileWriter writer = new FileWriter(outputPath.toFile())) {
+                        for (Map.Entry<String, String> entry : FIELD_MAPPINGS_FOR_TXT_OUTPUT.entrySet()) {
+                            String jsonFieldName = entry.getKey();      // The key in your JSON object (e.g., "title")
+                            String displayLabel = entry.getValue();     // The label to print in the TXT file (e.g., "Title")
+
+                            if (jsonNode.has(jsonFieldName)) {
+                                writer.write(displayLabel + ": " + jsonNode.get(jsonFieldName).asText() + System.lineSeparator());
+                            } else {
+                                writer.write(displayLabel + ": Not Provided" + System.lineSeparator());
+                            }
+                        }
+                    }
+                    ideaCount++; // Increment idea counter for successful processing
+                    System.out.println("Successfully created: " + outputPath.toString());
+
+                } catch (IOException e) {
+                    System.err.println("Error processing JSON line (IO issue): " + line + " - " + e.getMessage());
+                } catch (Exception e) { // Catch other potential parsing errors (e.g., malformed JSON)
+                    System.err.println("Error parsing JSON line: " + line + " - " + e.getMessage());
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading JSONL file: " + e.getMessage());
+        }
+
+        System.out.println("\nConversion complete. Total ideas processed: " + ideaCount);
+        if (ideaCount == 0) {
+            System.out.println("No ideas were processed. Please check your JSONL file path and content.");
+        }
+    }
+}
