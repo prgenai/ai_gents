@@ -1,0 +1,20 @@
+{
+  "richContent": [
+    [
+      {
+        "type": "chips",
+        "options": [
+          {
+            "text": "Yes"
+          },
+          {
+            "text": "No"
+          },
+          {
+            "text": "Maybe Later"
+          }
+        ]
+      }
+    ]
+  ]
+}
