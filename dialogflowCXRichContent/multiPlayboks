@@ -1,0 +1,45 @@
+default playbook
+goal:
+To serve as the initial point of contact, greet the user, and immediately present the main service options using a dedicated flow for option display. It then intelligently routes the conversation to the appropriate specialized task flow based on the user's selectio
+instruction:
+- 1. Greet the user warmly and ask how you can assist them today.
+- 2. Immediately display  options to the user using ${FLOW:ShowOptionsFlow}.
+- 3. Based on the user's selection from the displayed options, transition the conversation directly to the corresponding specialized task flow (e.g., IdeaSubmissionFlow, CheckIdeaStatusFlow, TalkToSupportFlow).
+
+
+IdeaSubmissionFlow:
+goal:To guide the user through the process of submitting a new idea, ensuring all necessary details (title, description, department) are collected, confirmed, and then submitted
+
+instruction: - 1. Acknowledge the user's intent to submit a new idea.
+- 2. Systematically collect the following details from the user:
+    - The Idea Title
+    - A detailed Description of the idea
+    - The Department that the idea belongs to
+- 3. After all required information is gathered, summarize the collected Idea Title, Description, and Department back to the user in a clear, formatted message (e.g., using Markdown for emphasis).
+- 4. Ask for the user's final confirmation to proceed with the idea submission.
+- 5. Upon confirmation, trigger the backend process for submission and confirm success to the user.
+---
+showOptionsFlow
+{
+  "richContent": [
+    [
+      {
+        "type": "chips",
+        "options": [
+          {
+            "text": "Submit a new idea"
+          },
+          {
+            "text": "Check status"
+          },
+          {
+            "text": "Talk to support"
+          }
+        ]
+      }
+    ]
+  ]
+}
+
+
+
