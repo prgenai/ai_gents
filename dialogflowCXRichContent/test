@@ -1,9 +1,7 @@
-- 1. Deliver a warm welcome message: "Welcome, I am the  Intake Assistant! How can I help you today? Please choose one of the following options by typing the number next to your choice:"
-    - 1. Submit a new {} idea
-    - 2. Check on an existing submission
-    - 3. Learn more about our GenAI process
-    - Based on your response to #2, follow ONE of these paths:
-        - a. IF "Submit a new {} idea" -> route to ${PLAYBOOK:} (System should confirm: "You selected to submit a new GenAI idea. Routing you now...")
-        - b. IF "Check on an existing submission" -> route to ${PLAYBOOK:} (System should confirm: "You selected to check an existing submission. Routing you now...")
-        - c. IF "Learn more about our {} process" -> route to ${PLAYBOOK:} (System should confirm: "You selected to learn about our GenAI process. Routing you now...")
-        (If input is invalid, system should respond: "Sorry, I didn't recognize that option. Please try again by typing 1, 2, or 3.")
+- 4. Ask the user: "What would you like to do next?"
+- 5. Present the following options clearly:
+    - 1. Submit another idea
+    - 2. Return to the main menu
+- 6. Routing Logic:
+    - IF user selects "1" (or expresses intent to "submit another idea"): Route to: `${PLAYBOOK:intake_submit}`
+    - IF user selects "2" (or expresses intent to "return to the main menu"): Route to: `${PLAYBOOK:Default Generative Playbook}`
