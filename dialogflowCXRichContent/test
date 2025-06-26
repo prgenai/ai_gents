@@ -12,3 +12,14 @@ BigQuery Job User	roles/bigquery.jobUser
 Write to Cloud Storage	Storage Object Admin	roles/storage.objectAdmin
 Trigger CF from Scheduler	Cloud Functions Invoker	roles/cloudfunctions.invoker
 Create/Manage Schedules	Cloud Scheduler Admin	roles/cloudscheduler.admin
+
+=====
+For creating Cloud Functions:
+
+Cloud Functions Developer → roles/cloudfunctions.developer
+
+Cloud Build Editor → roles/cloudbuild.builds.editor
+
+Service Account User → roles/iam.serviceAccountUser (to deploy using a specific service account)
+
+==========
