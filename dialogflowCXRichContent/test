@@ -1,17 +1,20 @@
 https://cloud.google.com/dialogflow/cx/docs/concept/playbook/tool
 
 
-👇 Summary Table
-Task	Role	IAM Role Name
-Invoke CF from Conversational Agent	Cloud Functions Invoker	roles/cloudfunctions.invoker
-Deploy Cloud Functions	Cloud Functions Developer	roles/cloudfunctions.developer
-Cloud Build Editor	roles/cloudbuild.builds.editor
-Service Account User	roles/iam.serviceAccountUser
-Write to BigQuery	BigQuery Data Editor	roles/bigquery.dataEditor
-BigQuery Job User	roles/bigquery.jobUser
-Write to Cloud Storage	Storage Object Admin	roles/storage.objectAdmin
-Trigger CF from Scheduler	Cloud Functions Invoker	roles/cloudfunctions.invoker
-Create/Manage Schedules	Cloud Scheduler Admin	roles/cloudscheduler.admin
+| **Task / Responsibility**                           | **Who Needs It**                  | **IAM Role**                     | **Purpose**                                       |
+| --------------------------------------------------- | --------------------------------- | -------------------------------- | ------------------------------------------------- |
+| Deploy Cloud Functions                              | Developer/User                    | `roles/cloudfunctions.developer` | Create, update, and delete functions              |
+|                                                     | Developer/User                    | `roles/cloudbuild.builds.editor` | Use Cloud Build to deploy functions               |
+|                                                     | Developer/User                    | `roles/iam.serviceAccountUser`   | Deploy functions with a specific service account  |
+| Invoke Cloud Function from Agent                    | Agent’s Service Account           | `roles/cloudfunctions.invoker`   | Allow conversational agent to call Cloud Function |
+| Execute Cloud Function that writes to BigQuery      | Cloud Function's Service Account  | `roles/bigquery.dataEditor`      | Write data to BigQuery tables                     |
+|                                                     | Cloud Function's Service Account  | `roles/bigquery.jobUser`         | Run BigQuery jobs (insert, select)                |
+| Execute Cloud Function that writes to Cloud Storage | Cloud Function's Service Account  | `roles/storage.objectAdmin`      | Full access to Cloud Storage buckets/objects      |
+|                                                     | *(optional)*                      | `roles/storage.objectCreator`    | Only write access to Cloud Storage                |
+| Trigger Cloud Function via Cloud Scheduler          | Cloud Scheduler's Service Account | `roles/cloudfunctions.invoker`   | Scheduler can call the Cloud Function             |
+| Manage Schedules                                    | Developer/User                    | `roles/cloudscheduler.admin`     | Create and manage Cloud Scheduler jobs            |
+| Deploy Scheduler with custom SA                     | Developer/User                    | `roles/iam.serviceAccountUser`   | Run scheduler with a service account              |
+
 
 =====
 For creating Cloud Functions:
