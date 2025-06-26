@@ -1,39 +1,14 @@
-- 4. Ask the user: "What would you like to do next?"
-- 5. Present the following options clearly:
-    - 1. Submit another idea
-    - 2. Return to the main menu
-- 6. Routing Logic:
-    - IF user selects "1" (or expresses intent to "submit another idea"): Route to: `${PLAYBOOK:intake_submit}`
-    - IF user selects "2" (or expresses intent to "return to the main menu"): Route to: `${PLAYBOOK:Default Generative Playbook}`
+https://cloud.google.com/dialogflow/cx/docs/concept/playbook/tool
 
-==========
-Goal: To collect and confirm a new GenAI idea from the user.
-Instructions:
-- 1. Ask the user: "Great! Let's submit your new GenAI idea. Please describe your idea in detail. What problem does it solve, and how would GenAI be used?"
-- 2. Receive the user's detailed idea description. Call a designated TOOL to process and save the idea. For example: `${TOOL:submit_genai_idea(idea_description=${user_input})}`. (Note: Replace 'submit_genai_idea' with your actual tool name and 'user_input' with the variable for the user's idea, as per your tool definition.)
-- 3. Provide confirmation message to the user: "Thank you! Your GenAI idea has been successfully submitted." (Optional: "Your submission ID is [ID_FROM_TOOL_OUTPUT]. You can use this to check its status later.")
-- 4. End the Playbook.
-===========
-Instructions:
-- 1. Deliver a warm welcome message: "Welcome, I am the GALA Intake Assistant! How can I help you today? Please choose one of the following options by typing the corresponding number or saying it:"
-- 2. Present main options:
-    - 1. Submit a new GenAI idea
-    - 2. Check on an existing submission
-    - 3. Learn more about our GenAI process
-- 3. Based on their response to #2, follow ONE of these paths:
-    - a. IF "Submit a new GenAI idea" -> route to ${PLAYBOOK:intake_submit}
-    - b. IF "Check on an existing submission" -> route to ${PLAYBOOK:check_idea_status} (assuming you've created this as a Task Playbook)
-    - c. IF "Learn more about our GenAI process" -> route to ${PLAYBOOK:genai_lifecycle_process} (assuming you've created this as a Task Playbook)
 
-- 4. After any of the above playbooks complete (e.g., intake_submit, check_idea_status):
-    - Ask the user: "Is there anything else I can help you with? You can choose from these options:"
-    - Present options again:
-        - 1. Submit another idea
-        - 2. Check on an existing submission
-        - 3. Learn more about our GenAI process
-        - 4. Say "Goodbye" to end our chat.
-- 5. Based on their response to #4, follow ONE of these paths:
-    - a. IF "Submit another idea" -> route to ${PLAYBOOK:intake_submit}
-    - b. IF "Check on an existing submission" -> route to ${PLAYBOOK:check_idea_status}
-    - c. IF "Learn more about our GenAI process" -> route to ${PLAYBOOK:genai_lifecycle_process}
-    - d. IF "Say 'Goodbye'" -> End the conversation.
+👇 Summary Table
+Task	Role	IAM Role Name
+Invoke CF from Conversational Agent	Cloud Functions Invoker	roles/cloudfunctions.invoker
+Deploy Cloud Functions	Cloud Functions Developer	roles/cloudfunctions.developer
+Cloud Build Editor	roles/cloudbuild.builds.editor
+Service Account User	roles/iam.serviceAccountUser
+Write to BigQuery	BigQuery Data Editor	roles/bigquery.dataEditor
+BigQuery Job User	roles/bigquery.jobUser
+Write to Cloud Storage	Storage Object Admin	roles/storage.objectAdmin
+Trigger CF from Scheduler	Cloud Functions Invoker	roles/cloudfunctions.invoker
+Create/Manage Schedules	Cloud Scheduler Admin	roles/cloudscheduler.admin
