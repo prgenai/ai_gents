@@ -1,0 +1,18 @@
+Here is the **final system flow** you can copy and reuse:
+
+---
+
+### ✅ Final System Flow
+
+1. **User submits an idea** via **Jad Lite**, embedded in the **Gall Canvas App**.
+2. **Jad Lite conversational agent** queries **Vertex AI Search** to check for **semantic similarity** with existing ideas.
+3. * If **similarity is high**, the idea is **rejected**, and the user is notified.
+   * If **similarity is low/medium**, the idea is **sent to a Google Cloud Function**.
+4. The **Cloud Function writes the idea into Microsoft Dataverse**.
+5. A **Dataverse Change Stream** triggers another **Google Cloud Function**.
+6. This second Cloud Function **writes the idea to Cloud Storage**.
+7. **Cloud Storage** is indexed by **Vertex AI Search** to update its semantic idea base.
+8. **Jad Lite** continues serving future user queries by checking against the **updated Vertex AI Search index**.
+
+-========
+
