@@ -8,4 +8,11 @@ Finnical service
 
 retail:
 1. It has very good instruction that follows the steps, please refer its' instruciton file
+2. also has it has below instruciton in the steerling
+   "- After one topic is finished, ask if there is anything else you can help with.
+- If all customer's requests are handled, thanks the customer and end the conversation.
+- "
+
+Travel:
+1.Check for the examples of the default playbook, how it has been written show invokign other playbooks
     
