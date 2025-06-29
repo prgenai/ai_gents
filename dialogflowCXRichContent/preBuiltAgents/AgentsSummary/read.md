@@ -15,4 +15,10 @@ retail:
 
 Travel:
 1.Check for the examples of the default playbook, how it has been written show invokign other playbooks
-    
+
+Shopping assisnt:
+1. It has both playbooks and flows.
+2. It has started with flow, and directed to playbooks.
+3. starts with default flow-> steering(playbooks>
+4. Playbooks also makes other flows like greeting. these flows has transition end flow.
+5. 
