@@ -1,0 +1,419 @@
+{
+  "playbook": {
+    "playbook": {
+      "displayName": "Default Generative Playbook",
+      "goal": "To serve as the initial point of contact, greet the user, and immediately present the main service options using a dedicated flow for option display. It then intelligently routes the conversation to the appropriate specialized task flow based on the user's selectio",
+      "steps": [ {
+        "text": "1. If $session.params.main_menu_choice is NOT set, greet the user warmly and ask how you can assist them today, then immediately display options to the user using ${FLOW:e55137fb-7783-4d37-bc5e-ad290e2649e1}."
+      }, {
+        "text": "2. Once the user has made a selection from the main menu options, the agent MUST immediately transition to the corresponding specialized flow based on this choice:",
+        "steps": [ {
+          "text": "If 'Submit a new idea', route to ${PLAYBOOK:b905c7ab-cb8c-46d3-85b8-49389a3a3fe3}."
+        }, {
+          "text": "If $session.params.main_menu_choice is 'Check existing idea status', proceed directly to ${PLAYBOOK:b905c7ab-cb8c-46d3-85b8-49389a3a3fe3}."
+        }, {
+          "text": "If $session.params.main_menu_choice is 'Understand idea lifecycle', proceed directly to ${PLAYBOOK:b905c7ab-cb8c-46d3-85b8-49389a3a3fe3}."
+        } ]
+      }, {
+        "text": "After one topic is finished, ask if there is anything else you can help with."
+      }, {
+        "text": "If all customer's requests are handled, thanks the customer and end the conversation"
+      } ],
+      "playbookRoutes": [ {
+        "playbookId": "b905c7ab-cb8c-46d3-85b8-49389a3a3fe3"
+      } ],
+      "flowRoutes": [ {
+        "flowId": "e55137fb-7783-4d37-bc5e-ad290e2649e1"
+      } ],
+      "etag": "6861daae",
+      "playbookId": "00000000-0000-0000-0000-000000000000",
+      "tokenCount": 360,
+      "playbookType": "WORKFLOW",
+      "codeBlock": {
+      
+      }
+    },
+    "examples": [ {
+      "key": "0ca49e68-e8b2-4510-b82b-4b9b6b10899c",
+      "value": {
+        "actions": [ {
+          "userUtterance": {
+            "text": "hi"
+          }
+        } ],
+        "playbookOutput": {
+          "executionSummary": "completed",
+          "actionParameters": {
+          
+          }
+        },
+        "id": "0ca49e68-e8b2-4510-b82b-4b9b6b10899c",
+        "etag": "685eb77e",
+        "displayName": "test",
+        "retrievalStrategy": "DEFAULT",
+        "description": "test",
+        "tokenCount": 44,
+        "conversationState": "OUTPUT_STATE_PENDING",
+        "languageCode": "en"
+      }
+    }, {
+      "key": "318e0fa4-a47a-4f1b-a031-d243eccc693f",
+      "value": {
+        "actions": [ {
+          "agentUtterance": {
+            "text": "How can I assist today? please select one of the options"
+          }
+        }, {
+          "flowTransition": {
+            "flow": "e55137fb-7783-4d37-bc5e-ad290e2649e1"
+          }
+        } ],
+        "playbookOutput": {
+          "executionSummary": "end the flow",
+          "actionParameters": {
+          
+          }
+        },
+        "id": "318e0fa4-a47a-4f1b-a031-d243eccc693f",
+        "etag": "6861df4b",
+        "displayName": "example2",
+        "retrievalStrategy": "STATIC",
+        "description": "example2",
+        "tokenCount": 99,
+        "conversationState": "OUTPUT_STATE_PENDING",
+        "languageCode": "en"
+      }
+    } ]
+  },
+  "referencedPlaybooks": [ {
+    "playbook": {
+      "displayName": "IdeaSubmissionFlow",
+      "goal": "To guide the user through the process of submitting a new idea, ensuring all necessary details (title, description, department) are collected, confirmed, and then submitted",
+      "steps": [ {
+        "text": "1. great the user\" welcome here\""
+      }, {
+        "text": "2. Systematically collect the following details from the user:",
+        "steps": [ {
+          "text": "The Idea Title"
+        }, {
+          "text": "A detailed Description of the idea"
+        }, {
+          "text": "Ask the Which The Department that the idea belongs by showing the options ${FLOW:b68c6fbb-c96c-4e23-ba9a-bac40d0fd087}"
+        } ]
+      }, {
+        "text": "3. After all required information is gathered, summarize the collected Idea Title, Description, and Department back to the user in a clear, formatted message (e.g., using Markdown for emphasis)."
+      }, {
+        "text": "4. Ask for the user's final confirmation to proceed with the idea submission."
+      }, {
+        "text": "5. Upon confirmation, trigger the backend process for submission and confirm success to the user."
+      } ],
+      "flowRoutes": [ {
+        "flowId": "b68c6fbb-c96c-4e23-ba9a-bac40d0fd087"
+      } ],
+      "etag": "6861e2cd",
+      "playbookId": "b905c7ab-cb8c-46d3-85b8-49389a3a3fe3",
+      "tokenCount": 208,
+      "playbookType": "TASK",
+      "codeBlock": {
+      
+      }
+    },
+    "examples": [ {
+      "key": "57116e44-2a05-407b-b27a-13871dbc208a",
+      "value": {
+        "actions": [ {
+          "agentUtterance": {
+            "text": "Welcome here! Let's submit your new idea.\n\nFirst, what is the title of your idea?\n"
+          }
+        } ],
+        "playbookInput": {
+          "precedingConversationSummary": "example",
+          "actionParameters": {
+          
+          }
+        },
+        "playbookOutput": {
+          "executionSummary": "example",
+          "actionParameters": {
+          
+          }
+        },
+        "id": "57116e44-2a05-407b-b27a-13871dbc208a",
+        "etag": "685eb6be",
+        "displayName": "example",
+        "retrievalStrategy": "DEFAULT",
+        "description": "example",
+        "tokenCount": 82,
+        "conversationState": "OUTPUT_STATE_PENDING",
+        "languageCode": "en"
+      }
+    }, {
+      "key": "7538bbfd-3252-41b6-a175-ec7318dbae4c",
+      "value": {
+        "actions": [ {
+          "agentUtterance": {
+            "text": "Welcome here!\n\nTo start, what is the title of your idea?\n"
+          }
+        } ],
+        "playbookInput": {
+          "precedingConversationSummary": "test2",
+          "actionParameters": {
+          
+          }
+        },
+        "playbookOutput": {
+          "executionSummary": "test2",
+          "actionParameters": {
+          
+          }
+        },
+        "id": "7538bbfd-3252-41b6-a175-ec7318dbae4c",
+        "etag": "685eb750",
+        "displayName": "test2",
+        "retrievalStrategy": "DEFAULT",
+        "description": "test2",
+        "tokenCount": 77,
+        "conversationState": "OUTPUT_STATE_PENDING",
+        "languageCode": "en"
+      }
+    } ]
+  } ],
+  "referencedFlows": [ {
+    "flow": {
+      "flowId": "e55137fb-7783-4d37-bc5e-ad290e2649e1",
+      "displayName": "ShowOptionsFlow",
+      "transitionEvents": [ {
+        "condition": {
+          "restriction": {
+            "comparator": "EQUALS",
+            "lhs": {
+              "value": "true"
+            },
+            "rhs": {
+              "value": "true"
+            }
+          }
+        },
+        "transitionEventHandler": {
+          "beforeTransition": {
+            "staticUserResponse": {
+              "candidates": [ {
+                "selector": {
+                  "platform": [ "PLATFORM_UNSPECIFIED" ],
+                  "lang": "en"
+                },
+                "responses": [ {
+                  "payload": {
+                    "richContent": [ [ {
+                      "options": [ {
+                        "text": "Submit a new idea"
+                      }, {
+                        "text": "Check status"
+                      }, {
+                        "text": "Talk to support"
+                      } ],
+                      "type": "chips"
+                    } ] ]
+                  }
+                } ]
+              } ]
+            }
+          },
+          "targetPageId": "END_FLOW"
+        },
+        "name": "0f866b11-2e2f-4f6a-bee4-168047b9bc7a",
+        "conditionString": "true = true"
+      } ],
+      "modelIdentifier": {
+        "modelId": "2d601278-7474-4b1b-add3-562c5c04343f"
+      },
+      "conversationEvents": [ {
+        "event": "sys.no-match-default",
+        "handler": {
+          "beforeTransition": {
+            "staticUserResponse": {
+              "candidates": [ {
+                "selector": {
+                  "platform": [ "PLATFORM_UNSPECIFIED" ],
+                  "lang": "en"
+                },
+                "responses": [ {
+                  "text": {
+                    "variants": [ {
+                      "text": "I didn't get that. Can you say it again?"
+                    }, {
+                      "text": "I missed what you said. What was that?"
+                    }, {
+                      "text": "Sorry, could you say that again?"
+                    }, {
+                      "text": "Sorry, can you say that again?"
+                    }, {
+                      "text": "Can you say that again?"
+                    }, {
+                      "text": "Sorry, I didn't get that. Can you rephrase?"
+                    }, {
+                      "text": "Sorry, what was that?"
+                    }, {
+                      "text": "One more time?"
+                    }, {
+                      "text": "What was that?"
+                    }, {
+                      "text": "Say that one more time?"
+                    }, {
+                      "text": "I didn't get that. Can you repeat?"
+                    }, {
+                      "text": "I missed that, say that again?"
+                    } ]
+                  }
+                } ]
+              } ]
+            }
+          }
+        },
+        "name": "e0bfd2c2-0403-47b6-aef9-3b2d9f4222a2"
+      }, {
+        "event": "sys.no-input-default",
+        "handler": {
+          "beforeTransition": {
+            "staticUserResponse": {
+              "candidates": [ {
+                "selector": {
+                  "platform": [ "PLATFORM_UNSPECIFIED" ],
+                  "lang": "en"
+                },
+                "responses": [ {
+                  "text": {
+                    "variants": [ {
+                      "text": "I didn't get that. Can you say it again?"
+                    }, {
+                      "text": "I missed what you said. What was that?"
+                    }, {
+                      "text": "Sorry, could you say that again?"
+                    }, {
+                      "text": "Sorry, can you say that again?"
+                    }, {
+                      "text": "Can you say that again?"
+                    }, {
+                      "text": "Sorry, I didn't get that. Can you rephrase?"
+                    }, {
+                      "text": "Sorry, what was that?"
+                    }, {
+                      "text": "One more time?"
+                    }, {
+                      "text": "What was that?"
+                    }, {
+                      "text": "Say that one more time?"
+                    }, {
+                      "text": "I didn't get that. Can you repeat?"
+                    }, {
+                      "text": "I missed that, say that again?"
+                    } ]
+                  }
+                } ]
+              } ]
+            }
+          }
+        },
+        "name": "fda2356d-2698-4eee-a701-448e1748cbcd"
+      } ],
+      "nluSettings": {
+        "classificationThreshold": 0.30000001,
+        "modelType": "MODEL_TYPE_ADVANCED",
+        "customConfigKey": "423e9075-ba5f-43dd-94e7-e6b7f513e94b"
+      },
+      "etag": "6861e113",
+      "nluSettingsMapping": [ {
+        "key": "en",
+        "value": {
+          "classificationThreshold": 0.30000001,
+          "modelType": "MODEL_TYPE_ADVANCED",
+          "customConfigKey": "423e9075-ba5f-43dd-94e7-e6b7f513e94b",
+          "languageCode": "en"
+        }
+      } ]
+    },
+    "intents": [ {
+      "meta": {
+        "id": "00000000-0000-0000-0000-000000000001",
+        "displayName": "Default Negative Intent",
+        "priority": 500000,
+        "isFallback": true
+      }
+    } ],
+    "entities": [ {
+      "id": "4f8fc472-5a44-4c63-9e63-c7fe6a85c2e1",
+      "displayName": "displayOptions",
+      "kind": "KIND_MAP",
+      "entries": [ {
+        "value": "Submit a new idea",
+        "synonyms": [ "Submit a new idea" ],
+        "lang": "en"
+      } ],
+      "nluSettings": {
+      
+      }
+    } ],
+    "pages": [ {
+      "key": "f977ab9d-d836-479a-855d-8f665e8ca9ab",
+      "value": {
+        "displayName": "getParams",
+        "slots": [ {
+          "displayName": "displayOption",
+          "mode": "REQUIRED",
+          "type": {
+            "className": "@displayOptions",
+            "classType": "ENUMERATION",
+            "enumerationId": "4f8fc472-5a44-4c63-9e63-c7fe6a85c2e1"
+          },
+          "fillBehavior": {
+            "initialPrompt": {
+              "staticUserResponse": {
+                "candidates": [ {
+                  "selector": {
+                    "platform": [ "PLATFORM_UNSPECIFIED" ],
+                    "lang": "en"
+                  },
+                  "responses": [ {
+                    "payload": {
+                      "richContent": [ [ {
+                        "options": [ {
+                          "text": "Submit a new idea"
+                        }, {
+                          "text": "Check status"
+                        }, {
+                          "text": "Talk to support"
+                        } ],
+                        "type": "chips"
+                      } ] ]
+                    }
+                  } ]
+                } ]
+              }
+            }
+          }
+        } ],
+        "transitionEvents": [ {
+          "condition": {
+            "restriction": {
+              "comparator": "EQUALS",
+              "lhs": {
+                "value": "true"
+              },
+              "rhs": {
+                "value": "true"
+              }
+            }
+          },
+          "transitionEventHandler": {
+            "beforeTransition": {
+            
+            }
+          },
+          "name": "9e129eda-46b6-44ff-aeb1-e8c134b71c78",
+          "conditionString": "true = true"
+        } ],
+        "etag": "6861db87"
+      }
+    } ]
+  } ]
+}

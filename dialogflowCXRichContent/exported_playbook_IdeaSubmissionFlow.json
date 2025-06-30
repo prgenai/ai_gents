@@ -1,0 +1,254 @@
+{
+  "playbook": {
+    "playbook": {
+      "displayName": "IdeaSubmissionFlow",
+      "goal": "To guide the user through the process of submitting a new idea, ensuring all necessary details (title, description, department) are collected, confirmed, and then submitted",
+      "steps": [ {
+        "text": "1. great the user\" welcome here\""
+      }, {
+        "text": "2. Systematically collect the following details from the user:",
+        "steps": [ {
+          "text": "The Idea Title"
+        }, {
+          "text": "A detailed Description of the idea"
+        }, {
+          "text": "Ask the Which The Department that the idea belongs by showing the options ${FLOW:b68c6fbb-c96c-4e23-ba9a-bac40d0fd087}"
+        } ]
+      }, {
+        "text": "3. After all required information is gathered, summarize the collected Idea Title, Description, and Department back to the user in a clear, formatted message (e.g., using Markdown for emphasis)."
+      }, {
+        "text": "4. Ask for the user's final confirmation to proceed with the idea submission."
+      }, {
+        "text": "5. Upon confirmation, trigger the backend process for submission and confirm success to the user."
+      } ],
+      "flowRoutes": [ {
+        "flowId": "b68c6fbb-c96c-4e23-ba9a-bac40d0fd087"
+      } ],
+      "etag": "6861e2cd",
+      "playbookId": "b905c7ab-cb8c-46d3-85b8-49389a3a3fe3",
+      "tokenCount": 208,
+      "playbookType": "TASK",
+      "codeBlock": {
+      
+      }
+    },
+    "examples": [ {
+      "key": "57116e44-2a05-407b-b27a-13871dbc208a",
+      "value": {
+        "actions": [ {
+          "agentUtterance": {
+            "text": "Welcome here! Let's submit your new idea.\n\nFirst, what is the title of your idea?\n"
+          }
+        } ],
+        "playbookInput": {
+          "precedingConversationSummary": "example",
+          "actionParameters": {
+          
+          }
+        },
+        "playbookOutput": {
+          "executionSummary": "example",
+          "actionParameters": {
+          
+          }
+        },
+        "id": "57116e44-2a05-407b-b27a-13871dbc208a",
+        "etag": "685eb6be",
+        "displayName": "example",
+        "retrievalStrategy": "DEFAULT",
+        "description": "example",
+        "tokenCount": 82,
+        "conversationState": "OUTPUT_STATE_PENDING",
+        "languageCode": "en"
+      }
+    }, {
+      "key": "7538bbfd-3252-41b6-a175-ec7318dbae4c",
+      "value": {
+        "actions": [ {
+          "agentUtterance": {
+            "text": "Welcome here!\n\nTo start, what is the title of your idea?\n"
+          }
+        } ],
+        "playbookInput": {
+          "precedingConversationSummary": "test2",
+          "actionParameters": {
+          
+          }
+        },
+        "playbookOutput": {
+          "executionSummary": "test2",
+          "actionParameters": {
+          
+          }
+        },
+        "id": "7538bbfd-3252-41b6-a175-ec7318dbae4c",
+        "etag": "685eb750",
+        "displayName": "test2",
+        "retrievalStrategy": "DEFAULT",
+        "description": "test2",
+        "tokenCount": 77,
+        "conversationState": "OUTPUT_STATE_PENDING",
+        "languageCode": "en"
+      }
+    } ]
+  },
+  "referencedFlows": [ {
+    "flow": {
+      "flowId": "b68c6fbb-c96c-4e23-ba9a-bac40d0fd087",
+      "displayName": "Deparaments",
+      "transitionEvents": [ {
+        "condition": {
+          "restriction": {
+            "comparator": "EQUALS",
+            "lhs": {
+              "value": "true"
+            },
+            "rhs": {
+              "value": "true"
+            }
+          }
+        },
+        "transitionEventHandler": {
+          "beforeTransition": {
+            "staticUserResponse": {
+              "candidates": [ {
+                "selector": {
+                  "platform": [ "PLATFORM_UNSPECIFIED" ],
+                  "lang": "en"
+                },
+                "responses": [ {
+                  "payload": {
+                  
+                  }
+                } ]
+              } ]
+            }
+          },
+          "targetPageId": "END_FLOW"
+        },
+        "name": "3bae8d80-310d-4156-9a96-88c32df4d739",
+        "conditionString": "true = true"
+      } ],
+      "modelIdentifier": {
+        "modelId": "00cb5a9e-16b9-4c61-85f4-80ec44df7e5b"
+      },
+      "conversationEvents": [ {
+        "event": "sys.no-match-default",
+        "handler": {
+          "beforeTransition": {
+            "staticUserResponse": {
+              "candidates": [ {
+                "selector": {
+                  "platform": [ "PLATFORM_UNSPECIFIED" ],
+                  "lang": "en"
+                },
+                "responses": [ {
+                  "text": {
+                    "variants": [ {
+                      "text": "I didn't get that. Can you say it again?"
+                    }, {
+                      "text": "I missed what you said. What was that?"
+                    }, {
+                      "text": "Sorry, could you say that again?"
+                    }, {
+                      "text": "Sorry, can you say that again?"
+                    }, {
+                      "text": "Can you say that again?"
+                    }, {
+                      "text": "Sorry, I didn't get that. Can you rephrase?"
+                    }, {
+                      "text": "Sorry, what was that?"
+                    }, {
+                      "text": "One more time?"
+                    }, {
+                      "text": "What was that?"
+                    }, {
+                      "text": "Say that one more time?"
+                    }, {
+                      "text": "I didn't get that. Can you repeat?"
+                    }, {
+                      "text": "I missed that, say that again?"
+                    } ]
+                  }
+                } ]
+              } ]
+            }
+          }
+        },
+        "name": "4eea9ce9-cba8-44bd-a4fa-be7fa4b67700"
+      }, {
+        "event": "sys.no-input-default",
+        "handler": {
+          "beforeTransition": {
+            "staticUserResponse": {
+              "candidates": [ {
+                "selector": {
+                  "platform": [ "PLATFORM_UNSPECIFIED" ],
+                  "lang": "en"
+                },
+                "responses": [ {
+                  "text": {
+                    "variants": [ {
+                      "text": "I didn't get that. Can you say it again?"
+                    }, {
+                      "text": "I missed what you said. What was that?"
+                    }, {
+                      "text": "Sorry, could you say that again?"
+                    }, {
+                      "text": "Sorry, can you say that again?"
+                    }, {
+                      "text": "Can you say that again?"
+                    }, {
+                      "text": "Sorry, I didn't get that. Can you rephrase?"
+                    }, {
+                      "text": "Sorry, what was that?"
+                    }, {
+                      "text": "One more time?"
+                    }, {
+                      "text": "What was that?"
+                    }, {
+                      "text": "Say that one more time?"
+                    }, {
+                      "text": "I didn't get that. Can you repeat?"
+                    }, {
+                      "text": "I missed that, say that again?"
+                    } ]
+                  }
+                } ]
+              } ]
+            }
+          }
+        },
+        "name": "c76fa963-87d8-4d3f-8dd4-6fc6179c9528"
+      } ],
+      "nluSettings": {
+        "classificationThreshold": 0.30000001,
+        "modelType": "MODEL_TYPE_ADVANCED",
+        "modelTrainingMode": "MODEL_TRAINING_MODE_AUTOMATIC",
+        "customConfigKey": "c68567aa-bab1-43a9-9a34-ac3ebdb0863a"
+      },
+      "ivrSettings": {
+        "enableIvr": true
+      },
+      "etag": "6861e255",
+      "nluSettingsMapping": [ {
+        "key": "en",
+        "value": {
+          "classificationThreshold": 0.30000001,
+          "modelType": "MODEL_TYPE_ADVANCED",
+          "modelTrainingMode": "MODEL_TRAINING_MODE_AUTOMATIC",
+          "customConfigKey": "c68567aa-bab1-43a9-9a34-ac3ebdb0863a",
+          "languageCode": "en"
+        }
+      } ]
+    },
+    "intents": [ {
+      "meta": {
+        "id": "00000000-0000-0000-0000-000000000001",
+        "displayName": "Default Negative Intent",
+        "priority": 500000,
+        "isFallback": true
+      }
+    } ]
+  } ]
+}
