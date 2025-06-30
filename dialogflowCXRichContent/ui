@@ -1,0 +1,27 @@
+<script>
+  let greetingDisplayed = sessionStorage.getItem('greetingDisplayed') === 'true';
+
+  // Function to handle df-messenger-loaded event
+  function handleMessengerLoaded() {
+    if (!greetingDisplayed) {
+      const dfMessenger = document.querySelector('df-messenger');
+      dfMessenger.renderCustomText(
+        "Hello and welcome to Tech With Sach! I'm Sach, your friendly digital assistant. Whether you're here for a quick visit or a deep dive, I'm ready to guide you through our digital universe. Ask me anything, explore, or just say hi – the journey is yours to shape. Let's make your experience here unforgettable!",
+        true
+      );
+      greetingDisplayed = true;
+      sessionStorage.setItem('greetingDisplayed', 'true'); // Store the flag in sessionStorage
+    }
+  }
+
+  // Check if df-messenger is already loaded
+  const dfMessenger = document.querySelector('df-messenger');
+  if (dfMessenger) {
+    handleMessengerLoaded(); // Call the handler immediately if df-messenger is already in the DOM
+  } else {
+    // Optionally, you can add a delay or polling here if df-messenger takes time to load
+  }
+
+  // Attach event listener for df-messenger-loaded
+  document.addEventListener('df-messenger-loaded', handleMessengerLoaded);
+</script>
