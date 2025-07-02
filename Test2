@@ -1,0 +1,9 @@
+from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route("/", methods=["POST"])
+def log_idea():
+    data = request.json
+    print("Received idea:", data)
+    return "Idea received!", 200
