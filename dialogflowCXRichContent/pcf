@@ -1,0 +1,143 @@
+Great! Here's everything you need to **embed your Google Dialogflow chatbot (hosted on GitHub Pages)** into a Power Apps **Canvas App** using a **PCF (Power Apps Component Framework)** component with an iframe.
+
+---
+
+## ✅ What You’ll Get
+
+* 🧩 A working **PCF control**
+* 📦 It embeds your chatbot (floating chat bubble) using **iframe**
+* ✅ Direct appearance — not a link
+* ⚙️ Configurable iframe size and URL
+
+---
+
+## 🛠 Step-by-Step Instructions to Build the PCF Control
+
+---
+
+### ✅ Step 1: Install Required Tools
+
+Make sure Node.js is installed, then install Power Platform CLI:
+
+```bash
+npm install -g pac
+```
+
+Also install PCF CLI template tools:
+
+```bash
+pac install latest
+```
+
+---
+
+### ✅ Step 2: Create the PCF Project
+
+```bash
+pac pcf init --namespace GalaAgent --name GalaAgentIframe --template field
+cd GalaAgentIframe
+```
+
+---
+
+### ✅ Step 3: Replace `index.ts`
+
+Open `src/index.ts` and replace the content with:
+
+```ts
+import { IInputs, IOutputs } from "./generated/ManifestTypes";
+
+export class GalaAgentIframe implements ComponentFramework.StandardControl<IInputs, IOutputs> {
+    private container: HTMLDivElement;
+    private iframe: HTMLIFrameElement;
+
+    constructor() {}
+
+    public init(
+        context: ComponentFramework.Context<IInputs>,
+        notifyOutputChanged: () => void,
+        state: ComponentFramework.Dictionary,
+        container: HTMLDivElement
+    ) {
+        this.container = container;
+
+        this.iframe = document.createElement("iframe");
+        this.iframe.src = "https://your-username.github.io/your-repo-name/"; // Replace this
+        this.iframe.width = "100%";
+        this.iframe.height = "600px";
+        this.iframe.style.border = "none";
+
+        this.container.appendChild(this.iframe);
+    }
+
+    public updateView(context: ComponentFramework.Context<IInputs>): void {}
+
+    public getOutputs(): IOutputs {
+        return {};
+    }
+
+    public destroy(): void {}
+}
+```
+
+> 🔁 Replace the URL `https://your-username.github.io/your-repo-name/` with your actual GitHub Pages chatbot URL.
+
+---
+
+### ✅ Step 4: Update `ControlManifest.Input.xml`
+
+Update the manifest like this:
+
+```xml
+<control namespace="GalaAgent" constructor="GalaAgentIframe" version="1.0.0" display-name-key="Gala Agent IFrame" description-key="Embed Dialogflow Chatbot">
+  <resources>
+    <code path="index.ts" order="1" />
+  </resources>
+  <property name="dummy" display-name-key="Dummy" type="SingleLine.Text" usage="bound" required="false" />
+  <manifest>
+    <control-usage>bound</control-usage>
+    <data-set>none</data-set>
+  </manifest>
+</control>
+```
+
+---
+
+### ✅ Step 5: Build the PCF Control
+
+Run the following:
+
+```bash
+npm install
+npm run build
+```
+
+---
+
+### ✅ Step 6: Push to Power Apps
+
+```bash
+pac auth create --url https://make.powerapps.com  # If not already authenticated
+pac pcf push --publisher-name Gala --publisher-prefix ga
+```
+
+---
+
+### ✅ Step 7: Add It to Your Canvas App
+
+1. Open **Power Apps Studio**
+2. Go to **Insert > Custom > Custom component**
+3. Drag and drop your `GalaAgentIframe` control
+4. Resize the control (width 100%, height 600px or more)
+
+---
+
+### 🎉 Result
+
+* The embedded iframe loads your GitHub Page
+* That page has the Dialogflow CX `<df-messenger>` web component
+* You get the **floating chatbot inside Power Apps** ✅
+
+---
+
+Would you like me to package this whole project and share a ZIP that you can import directly into your environment?
