@@ -1,1 +1,46 @@
+Traditional software behaves like this:
 
+input → code → output  
+(always the same)
+
+
+But LLM agents behave like this:
+
+input → reasoning → tool calls → final answer  
+(can vary each time)
+
+Because the model is probabilistic, it does things like:
+
+sometimes call the right tool
+
+sometimes hallucinate
+
+sometimes skip a tool
+
+sometimes misunderstand
+
+=========
+you cannot trust the agent just because it worked today
+
+You must evaluate the agent to be sure it behaves correctly all the time.
+-----
+Why ADK Evaluation Is Needed
+
+If you don’t evaluate the agent:
+
+⚠️ Tomorrow the agent might behave differently
+⚠️ New model updates may break your workflows
+⚠️ The agent may start using the wrong tools
+⚠️ Something that worked for months may suddenly fail
+----------
+⭐ Method 1: Test Files (Unit Tests for Agents)
+
+You create simple JSON files describing:
+
+user input
+
+expected tool calls
+
+expected final answer
+
+These run fast → good for CI/CD.
