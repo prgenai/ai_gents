@@ -45,3 +45,14 @@ expected tool calls
 expected final answer
 
 These run fast → good for CI/CD.
+
+
+---------
++-----------------------+       +-----------------------+       +-----------------------+
+|  Traditional Testing  |       |    LLM Evaluation     |       |   Agent Evaluation    |
++-----------------------+       +-----------------------+       +-----------------------+
+| Focus: Logic          |       | Focus: Knowledge      |       | Focus: Behavior       |
+| Method: Unit Tests    |       | Method: Benchmarks    |       | Method: System Checks |
+| Check: A == B?        |       | Check: Fact Correct?  |       | Check: Job Done?      |
+| Analogy: "Checklist"  |       | Analogy: "School Exam"|       | Analogy: "Job Review" |
++-----------------------+       +-----------------------+       +-----------------------+
